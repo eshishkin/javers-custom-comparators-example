@@ -1,1 +1,0 @@
-# javers-custom-comparators-example
