@@ -1,7 +1,6 @@
 package org.eshishkin.javers;
 
 
-import org.javers.common.exception.JaversException;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.javers.core.MappingStyle;
@@ -9,7 +8,6 @@ import org.javers.core.diff.Diff;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AppTest {
 
@@ -21,12 +19,12 @@ public class AppTest {
                 .registerEntity(EntityWithStringIdentifier.class)
                 .build();
 
-        assertThrows(JaversException.class, () -> {
-            javers.compare(
-                    new EntityWithStringIdentifier("John", "Doe", ""),
-                    new EntityWithStringIdentifier("John", "Doe", null)
-            );
-        });
+        Diff diff = javers.compare(
+                new EntityWithStringIdentifier("John", "Doe", ""),
+                new EntityWithStringIdentifier("John", "Doe", null)
+        );
+
+        assertFalse(diff.hasChanges());
     }
 
     @Test

@@ -19,6 +19,8 @@ public class CustomComparator implements CustomPropertyComparator<String, Proper
         if (equals(left, right)) {
             return Optional.empty();
         }
+        // In general this can be som complex stuff that creates ValueChange object,
+        // but for now it just returns a simple object with incoming parametes
         return Optional.of(new ValueChange(metadata, left, right));
     }
 
